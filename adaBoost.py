@@ -9,15 +9,14 @@ Against AdaBoost :
 __author__ = 'Gabriel'
 
 
-from loading import loadData
+from loading import loadData, loadTrainAndTestFeaturesData
 
 import numpy as np
 import time
 
 from sklearn.ensemble import AdaBoostClassifier
 
-(X_train, X_test, y_train, y_test) = loadData('small')
-
+X_train, X_test,y_train, y_test = loadTrainAndTestFeaturesData(True,False)
 
 start = time.time()
 

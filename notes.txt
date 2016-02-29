@@ -1,0 +1,12 @@
+
+
+Brainstorm 10:30 am Monday
+
+Correlations interesting
+Warning, number of cloud sampling smaller than number of cloud
+Need to clean the data from very big and very small data
+Random forest gave best results
+
+Hard to make spark work !
+
+
