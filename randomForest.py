@@ -11,7 +11,7 @@ X_train, X_test,y_train, y_test = loadTrainAndTestFeaturesData(True,False)
 
 start = time.time()
 
-randomF = RandomForestClassifier(n_estimators=20)
+randomF = RandomForestClassifier(n_estimators=10)
 randomF.fit(X_train,y_train)
 
 meanScorerandomF = randomF.score(X_test,y_test)

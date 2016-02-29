@@ -112,7 +112,7 @@ Split input in 75% training set and 25% testing set
 return X,Y,X_test,Y_test
 '''
 def loadTrainAndTestFeaturesData(keepRawFeature=True, scaled=False, *listFeatFunction):
-    (X,X_test, Y, Y_test) = loadData("big")
+    (X,X_test, Y, Y_test) = loadData("small")
 
     X = cleanData(X)
     X_test = cleanData(X_test)

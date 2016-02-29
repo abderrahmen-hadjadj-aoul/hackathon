@@ -37,3 +37,8 @@ RandomForest 10 arbres
 Total Number of new features : 0
 The mean score is : 0.934989893891
 Elapsed time : 145.8073399066925
+
+RandomForest 20 arbres
+The mean score is : 0.937726921971
+Elapsed time : 288.6045069694519
+
