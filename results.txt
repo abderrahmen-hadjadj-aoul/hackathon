@@ -1,0 +1,18 @@
+#----------- LOGISTIC REGRESSION
+For LogReg :
+The mean score is : 0.821515151515
+Elapsed time : 0.14900898933410645
+Against LogReg :
+
+#----------- ADABOOST
+For AdaBoost :
+Ada boost can give a probability for a class
+The mean score is : 0.859878787879
+Elapsed time : 6.097348928451538
+Against AdaBoost :
+
+#----------- BAGGING
+For Bagging :
+The mean score is : 0.856363636364
+Elapsed time : 8.814503908157349
+Against Bagging :
