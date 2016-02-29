@@ -1,3 +1,4 @@
+# On 50k points --------------------------------------------------------
 #----------- LOGISTIC REGRESSION
 For LogReg :
 The mean score is : 0.821515151515
@@ -26,3 +27,13 @@ Achieved 86.7% precision in testing
 Params : neurons = 12, weigth decay (regularization) = 0.3
 1.81 minutes to compute training + test
 Precision achieved in testing : 87.3 %
+
+# On 1600k points --------------------------------------------------------
+adaBoost
+The mean score is : 0.89224632839
+Elapsed time : 317.54716205596924
+
+RandomForest 10 arbres
+Total Number of new features : 0
+The mean score is : 0.934989893891
+Elapsed time : 145.8073399066925

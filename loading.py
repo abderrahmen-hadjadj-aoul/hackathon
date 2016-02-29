@@ -3,6 +3,59 @@ from sklearn import preprocessing
 from sklearn.cross_validation import train_test_split
 import os.path
 
+import mmap
+
+def numberLine(file):
+    nbLine =0
+    for l in file:
+        nbLine += 1
+
+    file.seek(0)
+
+    return nbLine
+
+def getShapes(file,delimiter):
+    f = open(file)
+    nbLine = numberLine(f)
+
+    l = f.readline()
+    nbFeatures = l.count(delimiter) + 1
+    f.close()
+
+    return (nbLine,nbFeatures)
+
+def loadFile(fileNameData,fileNameLabel,delimiter=","):
+
+    (nbLine,nbFeatures) = getShapes(fileNameData,delimiter)
+    x = numpy.zeros((nbLine,nbFeatures), dtype=numpy.float)
+    y = numpy.zeros((nbLine),dtype=numpy.float)
+
+    indexRemoved = []
+    nbIndexRemoved = 0
+
+    for i,l in enumerate(open(fileNameData,"r")):
+        nbIndexRemoved = len(indexRemoved)
+        try:
+            elements = l.split(delimiter)
+            for j,e in enumerate(elements):
+                x[i-nbIndexRemoved,j] = float(e)
+        except ValueError:
+            indexRemoved.append(i)
+
+    x.resize((nbLine-nbIndexRemoved,nbFeatures))
+    y.resize((nbLine-nbIndexRemoved))
+
+    ii = 0
+    for i,l in enumerate(open(fileNameLabel,"r")):
+        if i in indexRemoved:
+            pass
+        else:
+            y[ii] = float("True" in l)
+            ii +=1
+
+    return x,y
+
+
 def loadData(dataType='small') :
 
     dirPath = ''
@@ -22,14 +75,28 @@ def loadData(dataType='small') :
     elif dataType == 'big':
         fileNameData = dirPath + 'data/Big_data_cloud_SUPAERO.csv'
         fileNameLabel = dirPath + 'data/Big_label_cloud_SUPAERO.csv'
-        x = numpy.loadtxt(fileNameData,delimiter=",")
-        y = numpy.loadtxt(fileNameLabel,delimiter=",")
-
-
-
+        x,y = loadFile(fileNameData,fileNameLabel,delimiter=",")
 
     X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=42)
     return (X_train, X_test, y_train, y_test)
+
+
+
+
+'''
+Remove extremes values (which may have results from dividing by zero)
+'''
+def cleanData(array, maxValue=1e6, minValue=-1e6, zeroValue=1e-6):
+    for i,l in enumerate(array):
+        for j,v in enumerate(l):
+            if v > maxValue:
+                array[i,j] = maxValue
+            elif v < minValue:
+                array[i,j] = minValue
+            elif abs(v) < zeroValue:
+                array[i,j] = zeroValue
+
+    return array
 
 
 '''
@@ -44,10 +111,11 @@ Split input in 75% training set and 25% testing set
 
 return X,Y,X_test,Y_test
 '''
-
-
 def loadTrainAndTestFeaturesData(keepRawFeature=True, scaled=False, *listFeatFunction):
-    (X,X_test, Y, Y_test) = loadData()
+    (X,X_test, Y, Y_test) = loadData("big")
+
+    X = cleanData(X)
+    X_test = cleanData(X_test)
 
     if scaled:
         X = preprocessing.scale(X)
@@ -124,3 +192,6 @@ def extendArray(array, keepValues, numberOfColumn):
         array_ext = numpy.zeros((U, numberOfColumn))
 
     return array_ext;
+
+
+
