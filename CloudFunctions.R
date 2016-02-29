@@ -72,3 +72,40 @@ scaleTable <- function(data, vMin = NULL, vMax = NULL)
       
       return(list("normData" = data, "vMin" = vMin, "vMax" = vMax))
 }
+
+createFeatures <- function(data)
+{
+      nbFeatures <- ncol(data)
+      nbNewFeatures <- (nbFeatures * (nbFeatures - 1))/2
+      
+      tab <- matrix(0, nrow = nrow(data), ncol = nbNewFeatures)
+      tab <- as.data.frame(tab)
+      k <- 1
+      
+      for(i in 1:(nbFeatures-1))
+      {
+            for(j in (i+1):nbFeatures)
+            {
+                  tab[, k] <- (data[,i]-mean(data[,i]))*(data[,j]-mean(data[,j]))
+                  #tab[, k] <- data[,i] / data[,j]
+                  colnames(tab)[k] <- paste("V", i, "mV", j, sep = "")
+                  k <- k + 1
+            }
+      }
+      
+      return(tab)
+}
+
+cleanOutliers <- function(data, span)
+{
+      i <- 1
+      data.clean <- data
+      
+      for(i in span)
+      {
+            indexOutliers <- data.clean[,i] > ( mean(data.clean[,i]) + 5*sd(data.clean[,i]) )
+            data.clean <- data.clean[which(indexOutliers == 0), ]
+      }
+      
+      return(data.clean)
+}
