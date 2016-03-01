@@ -1,0 +1,14 @@
+==== Recap features engineering ====
+
+DONE:
+-> Correlation fallacieuse avec outliers
+-> Création de features croisées (rapports, sommes, différences) peu intéressantes pour améliorer la prédiction
+-> Suppression de features sur le pixel (niveau 1) : très léger impact négatif sur la précision
+-> Suppression des features connexes de niveau 2 et 4 : impact plus important sur la précision
+
+TO DO:
+-> ACP ? Peu prometteur
+-> Features polynomiales ? Réfléchir à des features possédant un "sens physique" pour la détection des nuages
+-> Recherche Internet sur état de l'art
+
+====================================
