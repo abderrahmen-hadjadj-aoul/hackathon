@@ -1,3 +1,4 @@
+import numpy
 from loading import loadTrainAndTestFeaturesData, loadFile, cleanData
 
 __author__ = 'Gabriel'
@@ -22,7 +23,9 @@ def writeDownSVMFile(valuesData,valuesLabels, dataFilePath):
     f.close()
 
 
-x,y = loadFile("./data/Small_data_cloud.csv","./data/Small_label_cloud.csv",delimiter=",")
+#x,y = loadFile(,,delimiter=",")
+x = numpy.genfromtxt("./data/Small_data_cloud.csv", delimiter=",")
+y = numpy.genfromtxt("./data/Small_label_cloud.csv", delimiter=",")
 x = cleanData(x)
 
 writeDownSVMFile(x,y, "./Small_data_cloud.svm")

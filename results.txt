@@ -42,3 +42,28 @@ RandomForest 20 arbres
 The mean score is : 0.937726921971
 Elapsed time : 288.6045069694519
 
+#-------------------------------------TEST Importance first 6 features, 100 tests
+With the 6 firsts
+Time
+1.99322399855
+0.0340498160576
+Score
+Mean 0.857148484848
+Std 0.00144939428785
+
+Without the 6 firsts
+Time
+1.51310653925
+0.0340145881309
+Score
+Mean 0.858726060606
+Std 0.00143053362291
+
+With the 6 firsts and **2 and **3
+Time
+2.52393435955
+0.0401072754476
+
+Score
+Mean 0.854758181818
+Std 0.00155306492201
