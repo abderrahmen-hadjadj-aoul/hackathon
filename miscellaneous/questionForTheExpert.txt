@@ -1,0 +1,37 @@
+Question to ask the expert :
+
+Nous avons testé :
+Différences 2 à 2 de chaque features
+Features Polynomiales **2 et **3
+sommeTotale
+
+
+1 features permet de déterminer à 82% nuage ou pas
+94% avec les 1,6 millions de points
+
+Clustering + random forest
+
+
+Qu'est-ce qui caractérise l'absorption dans un nuage, plus que par la terre ?
+A quel moment on peut confondre le nuage et le sol ?
+
+
+Classfier pixel : 5-6 features en général
+Clustering : 
+
+Trie des features :
+Choix trois features
+Générer 100 jeux de données 10 fois plus petit
+Pour chaque, faire classifier avec features choisies
+Quels points toujours mal classés, toujours bien classé, entre les deux (point critiques)
+
+Dupliquer les exemples (de nuages pour équilibrer)
+
+Outliers 
+
+Classifier les données dures à classifier
+
+Décorrélation avec réduction de dimension (PCA) sur 10k exemples
+8 combinaisons linéaires (au hazard ou pca), voir si ça change
+
+

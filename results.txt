@@ -67,3 +67,29 @@ Time
 Score
 Mean 0.854758181818
 Std 0.00155306492201
+
+# On 1600k points without 6 first + **2 + **3
+
+Total Number of new features : 36
+The mean score is : 0.935457443661
+Elapsed time : 416.1318008899689
+
+#--------------------------- With 9,11,12
+On 50k points
+Total Number of new features : 3
+The mean score is : 0.852363636364
+The mean score is : 0.851333333333
+The mean score is : 0.85103030303
+The mean score is : 0.851575757576
+On 1600k points
+The mean score is : 0.908860895668
+
+#--------------------------- with only the first 7 component of the PCA
+100 arbre, profondeur 15
+Small data set
+The mean score is : 0.86928
+Elapsed time : 10.449597835540771
+
+Big dataSet
+The mean score is : 0.91618831754
+Elapsed time : 107.03712201118469

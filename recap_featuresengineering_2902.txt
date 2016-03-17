@@ -12,3 +12,10 @@ TO DO:
 -> Recherche Internet sur état de l'art
 
 ====================================
+Différences 2 à 2 de chaque features -> ne marche pas
+Features Polynomiales **2 et **3 -> ne marche pas
+Les six premières features sont inutiles
+
+Clustering + random forest
+
+

@@ -1,36 +1,22 @@
 __author__ = 'Gabriel'
 
-from loading import loadData, loadTrainAndTestFeaturesData
+from loading import loadTrainAndTestFeaturesData
 
-import numpy as np
 import time
-import scipy as sc
 
 from sklearn.ensemble import RandomForestClassifier
 
-remove6first = lambda x:x[6:]
-power = lambda x:[z**2 for z in x[:6]] + [z**3 for z in x[:6]]
+remove15 = lambda x:[x[9],x[11],x[12]]
+power = lambda x:[z**2 for z in x[6:]] + [z**3 for z in x[6:]]
 
-X_train, X_test,y_train, y_test = loadTrainAndTestFeaturesData(True,False,power)
+X_train, X_test,y_train, y_test = loadTrainAndTestFeaturesData(False,False,remove15)
 
-storeTime = []
-storeScore = []
+start = time.time()
 
-for i in range(0,100):
-    print(i)
-    start = time.time()
+randomF = RandomForestClassifier(n_estimators=20,max_depth=10)
+randomF.fit(X_train,y_train)
 
-    randomF = RandomForestClassifier(n_estimators=10)
-    randomF.fit(X_train,y_train)
+meanScorerandomF = randomF.score(X_test,y_test)
 
-    meanScorerandomF = randomF.score(X_test,y_test)
-
-    storeTime.append(time.time()-start)
-    storeScore.append(meanScorerandomF)
-    #print("The mean score is : "+str(meanScorerandomF))
-    #print("Elapsed time : "+str(time.time()-start))
-
-print(sc.mean(storeTime))
-print(sc.std(storeTime))
-print(sc.mean(storeScore))
-print(sc.std(storeScore))
+print("The mean score is : "+str(meanScorerandomF))
+print("Elapsed time : "+str(time.time()-start))

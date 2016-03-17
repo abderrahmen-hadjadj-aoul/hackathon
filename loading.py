@@ -107,12 +107,12 @@ Y,Y_test has 1 columns
 Take a list of features function
 A feature function is a function from R^18 -> R^n
 
-Split input in 75% training set and 25% testing set
+Split input in 66% training set and 33% testing set
 
 return X,Y,X_test,Y_test
 '''
 def loadTrainAndTestFeaturesData(keepRawFeature=True, scaled=False, *listFeatFunction):
-    (X,X_test, Y, Y_test) = loadData("small")
+    (X,X_test, Y, Y_test) = loadData("big")
 
     X = cleanData(X)
     X_test = cleanData(X_test)
@@ -193,5 +193,95 @@ def extendArray(array, keepValues, numberOfColumn):
 
     return array_ext;
 
+def forceProportion(values,labels,proportionClass1 = 0.5):
+    assert proportionClass1 != 0.0
 
+    total = len(labels)
+    numberClass1 = sum(labels)
+    numberClass0 = total-numberClass1
+
+    newTot = int(numberClass1/proportionClass1)
+    class0NumberToKeep = int((1-proportionClass1) * newTot)
+    assert class0NumberToKeep + numberClass1 == newTot
+
+    width_array = len(values[0])
+
+    newValues = numpy.zeros((newTot,width_array))
+    newLabels = numpy.zeros((newTot))
+
+    i = numberClass1
+    j = class0NumberToKeep
+
+    currentLineRead = 0
+    currentLineWrite = 0
+
+    while max(i,j) > 0:
+        if labels[currentLineRead] == 1.0:
+            if(i>0):
+                newValues[currentLineWrite] = values[currentLineRead]
+                newLabels[currentLineWrite] = labels[currentLineRead]
+                i -=1
+                currentLineWrite +=1
+        else:
+            if(j>0):
+                newValues[currentLineWrite] = values[currentLineRead]
+                newLabels[currentLineWrite] = labels[currentLineRead]
+                j -=1
+                currentLineWrite +=1
+
+        currentLineRead +=1
+
+    return newValues,newLabels
+
+def forceProportionDuplication(values,labels,proportionClass1 = 0.5):
+    assert proportionClass1 != 0.0
+
+    total = len(labels)
+    numberClass1 = sum(labels)
+    numberClass0 = total-numberClass1
+
+    newTot = int(numberClass0/(1-proportionClass1))
+
+    newNumberClass1 = int(newTot * proportionClass1)
+
+    assert newNumberClass1 + numberClass0 == newTot
+
+    width_array = len(values[0])
+
+    newValues = numpy.zeros((newTot,width_array))
+    newLabels = numpy.zeros((newTot))
+
+    i = newNumberClass1
+    j = numberClass0
+
+    currentLineRead = 0
+    currentLineWrite = 0
+
+    while max(i,j) > 0:
+        if currentLineRead < total:
+
+            if labels[currentLineRead] == 1.0:
+                if(i>0):
+                    newValues[currentLineWrite] = values[currentLineRead]
+                    newLabels[currentLineWrite] = labels[currentLineRead]
+                    i -=1
+                    currentLineWrite +=1
+            else:
+                if(j>0):
+                    newValues[currentLineWrite] = values[currentLineRead]
+                    newLabels[currentLineWrite] = labels[currentLineRead]
+                    j -=1
+                    currentLineWrite +=1
+
+        else:
+
+            if(i>0):
+                newValues[currentLineWrite] = newValues[currentLineRead%total]
+                newLabels[currentLineWrite] = newLabels[currentLineRead%total]
+                i -=1
+                currentLineWrite +=1
+
+        currentLineRead +=1
+
+    return newValues,newLabels
 
